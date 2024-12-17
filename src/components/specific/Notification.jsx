@@ -38,7 +38,7 @@ const Notification = () => {
 
   return (
     <Dialog open={isNotification} onClose={closeHandler}>
-      <Stack p={{ xs: "1rem", sm: "2rem" }} maxWidth={"25rem"}>
+      <Stack p={{ xs: "0.5rem", sm: "1rem" }} maxWidth={"35rem"}>
         <DialogTitle>Notification</DialogTitle>
 
         {isLoading ? (
@@ -71,10 +71,10 @@ const NotificationItem = memo(({ sender, _id, handler }) => {
       <Stack
         direction={"row"}
         alignItems={"center"}
-        spacing={"1rem"}
+        spacing={"0.5rem"}
         width={"100%"}
       >
-        <Avatar />
+        <Avatar src={avatar} />
 
         <Typography
           variant="body1"

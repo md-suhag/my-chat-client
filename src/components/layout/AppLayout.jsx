@@ -95,20 +95,18 @@ const AppLayout = () => (WrappedComponent) => {
           dispatch={dispatch}
           deleteMenuAnchor={deleteMenuAnchor}
         />
-        {isLoading ? (
-          <Skeleton />
-        ) : (
-          <Drawer open={isMobile} onClose={handleMobile}>
-            <ChatList
-              w="70vw"
-              chats={data?.chats}
-              chatId={chatId}
-              handleDeleteChat={handleDeleteChat}
-              newMessagesAlert={newMessagesAlert}
-              onlineUsers={onlineUsers}
-            />
-          </Drawer>
-        )}
+
+        <Drawer open={isMobile} onClose={handleMobile}>
+          <ChatList
+            w="70vw"
+            chats={data?.chats}
+            chatId={chatId}
+            handleDeleteChat={handleDeleteChat}
+            newMessagesAlert={newMessagesAlert}
+            onlineUsers={onlineUsers}
+          />
+        </Drawer>
+
         <Grid container height={"calc(100vh - 4rem)"}>
           <Grid
             item
