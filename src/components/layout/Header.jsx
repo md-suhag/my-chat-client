@@ -1,6 +1,7 @@
 import {
   AppBar,
   Backdrop,
+  Badge,
   Box,
   IconButton,
   Toolbar,
@@ -24,19 +25,25 @@ import { userNotExists } from "../../redux/reducers/auth";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { server } from "../../constants/config";
-import { setIsMobile, setIsSearch } from "../../redux/reducers/misc";
+import {
+  setIsMobile,
+  setIsNewGroup,
+  setIsNotification,
+  setIsSearch,
+} from "../../redux/reducers/misc";
+import { resetNotificationCount } from "../../redux/reducers/chat";
 const Search = lazy(() => import("../specific/Search"));
 const Notification = lazy(() => import("../specific/Notification"));
 const NewGroup = lazy(() => import("../specific/NewGroup"));
 
 const Header = () => {
-  const [isNewGroup, setIsNewGroup] = useState(false);
-  const [isNotification, setIsNotification] = useState(false);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { isSearch } = useSelector((state) => state.misc);
+  const { isSearch, isNotification, isNewGroup } = useSelector(
+    (state) => state.misc
+  );
+  const { notificationCount } = useSelector((state) => state.chat);
 
   const handleMobile = () => {
     dispatch(setIsMobile(true));
@@ -44,13 +51,13 @@ const Header = () => {
   const openSearch = () => dispatch(setIsSearch(true));
 
   const openNewGroup = () => {
-    setIsNewGroup((prev) => !prev);
-    console.log("new group toggled:", !isNewGroup);
+    dispatch(setIsNewGroup(true));
   };
   const navigateToGroup = () => navigate("/groups");
 
   const openNotification = () => {
-    setIsNotification((prev) => !prev);
+    dispatch(setIsNotification(true));
+    dispatch(resetNotificationCount());
   };
   const logoutHandler = async () => {
     try {
@@ -67,10 +74,7 @@ const Header = () => {
     <>
       <Box sx={{ flexGrow: 1 }} height={"4rem"}>
         <AppBar
-          // position="static"
-          sx={{
-            bgcolor: lightBlue,
-          }}
+        // position="static"
         >
           <Toolbar>
             <Typography
@@ -132,6 +136,7 @@ const Header = () => {
                 title="Notifications"
                 icon={<NotificationsIcon />}
                 onClick={openNotification}
+                value={notificationCount}
               />
               <IconBtn
                 title="Logout"
@@ -162,11 +167,17 @@ const Header = () => {
   );
 };
 
-const IconBtn = ({ title, icon, onClick }) => {
+const IconBtn = ({ title, icon, onClick, value }) => {
   return (
     <Tooltip title={title}>
       <IconButton color="inherit" size="large" onClick={onClick}>
-        {icon}
+        {value ? (
+          <Badge badgeContent={value} color="error">
+            {icon}
+          </Badge>
+        ) : (
+          icon
+        )}
       </IconButton>
     </Tooltip>
   );

@@ -25,6 +25,8 @@ import {
   Navigate,
   useNavigate,
 } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { adminLogout } from "../../redux/thunks/admin";
 // import { Link } from "./../styles/StyledComponents";
 
 const Link = styled(LinkComponent)`
@@ -63,8 +65,10 @@ const adminTabs = [
 const Sidebar = ({ w = "100%" }) => {
   const location = useLocation();
   const naviate = useNavigate();
+  const dispatch = useDispatch();
+
   const logoutHandler = () => {
-    console.log("logout");
+    dispatch(adminLogout());
   };
   return (
     <Stack
@@ -144,9 +148,8 @@ const Sidebar = ({ w = "100%" }) => {
   );
 };
 
-const isAdmin = true;
-
 const AdminLayout = ({ children }) => {
+  const { isAdmin } = useSelector((state) => state.auth);
   const [isMobile, setIsMobile] = useState(false);
 
   const handleMobile = () => setIsMobile(!isMobile);

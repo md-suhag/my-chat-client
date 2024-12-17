@@ -86,7 +86,7 @@ const DoughnutChart = ({ value = [], labels = [] }) => {
     datasets: [
       {
         data: value,
-        label: "Total Chats vs Group Chats",
+        // label: "Total Chats vs Group Chats",
         offset: 30,
         backgroundColor: ["rgba(75,192,192,0.4)", "rgba(75,12,192,0.4)"],
         borderColor: ["rgba(75,192,192,0.4)", "rgba(75,12,192,0.4)"],
