@@ -184,10 +184,10 @@ const Chat = ({ chatId, user }) => {
         ref={containerRef}
         boxSizing={"border-box"}
         padding={"1rem"}
-        spacing={"1rem"}
-        height={"90%"}
+        spacing={"0.1rem"}
         bgcolor={"rgba(0,0,0,0.04)"}
         sx={{
+          height: { xs: "85%", md: "88%" },
           overflowX: "hidden",
           overflowY: "auto",
           scrollbarWidth: "thin", // Firefox support for thin scrollbar
@@ -209,7 +209,7 @@ const Chat = ({ chatId, user }) => {
         <div ref={bottomRef} />
       </Stack>
 
-      <form style={{ height: "10%" }} onSubmit={submitHandler}>
+      <form style={{ height: "auto" }} onSubmit={submitHandler}>
         <Stack
           direction={"row"}
           height={"100%"}
@@ -229,6 +229,10 @@ const Chat = ({ chatId, user }) => {
           </IconButton>
 
           <InputBox
+            sx={{
+              paddingTop: "10px",
+              paddingBottom: "10px",
+            }}
             placeholder="Type message here...."
             value={message}
             onChange={messageOnChange}

@@ -56,7 +56,13 @@ const Search = () => {
   }, [search.value]);
   return (
     <Dialog open={isSearch} onClose={searchCloseHandler}>
-      <Stack p={"2rem"} direction={"column"} width={"25rem"}>
+      <Stack
+        sx={{
+          padding: { xs: "1rem", md: "2rem" },
+        }}
+        direction={"column"}
+        maxWidth={"25rem"}
+      >
         <DialogTitle textAlign={"center"}>Find People</DialogTitle>
         <TextField
           label=""

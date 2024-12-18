@@ -365,7 +365,7 @@ const Groups = () => {
         onClose={handleMobileClose}
       >
         <GroupsList
-          w={"50vw"}
+          w={"85vw"}
           myGroups={myGroups?.data?.groups}
           chatId={chatId}
         />
