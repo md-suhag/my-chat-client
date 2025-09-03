@@ -131,4 +131,4 @@ password: User5
 
 ## Thank You
 
-Happy shopping & coding! 💻
+Happy coding! 💻
